@@ -1,0 +1,27 @@
+//gitignore for swift
+
+
+.DS_Store
+xcuserdata/
+*.xcuserstate
+*.xcodeproj/xcuserdata/
+*.apns
+*.p8
+*.cer
+*.p12
+*.ipa
+*.mobileprovision
+*.dSYM.zip
+*.dSYM
+fastlane/*
+output
+build/
+/.build
+DerivedData/
+.swiftpm/
+.netrc
+/Packages
+.env
+
+CityMap.xcodeproj/project.xcworkspace/xcuserdata
+CityMap.xcodeproj/xcuserdata
