@@ -9,7 +9,7 @@ import Foundation
 
 protocol CityMapRepositoryProtocol {
     func requestCities() async throws -> [City]
-    func fetchCities() async -> [City]
+    func fetchCities() -> [City]
     func fetchFavorites() -> [City]
 }
 
@@ -32,7 +32,7 @@ final class CityMapRepository: CityMapRepositoryProtocol {
         }
     }
 
-    func fetchCities() async -> [City] {
+    func fetchCities() -> [City] {
         return []
     }
 
