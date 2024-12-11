@@ -45,7 +45,10 @@ class CitiesListViewModel: ObservableObject {
 
     init(repository: CityMapRepositoryProtocol = CityMapRepository()) {
         self.repository = repository
+        setUpData()
+    }
 
+    func setUpData() {
         Task {
             await loadCities()
         }
