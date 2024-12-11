@@ -8,10 +8,11 @@
 import SwiftUI
 
 class CitiesListViewModel: ObservableObject {
-    @Published var favorites: Set<Int> = []
+    @Published var favorites: Set<City> = []
     @Published var searchText: String = ""
     @Published var showFavoritesOnly: Bool = false
 
+    @Published var isLoading = false
     @Published var errorMessage: String?
 
     private var citiesList: [City] = []
@@ -25,7 +26,7 @@ class CitiesListViewModel: ObservableObject {
     var visibleCities: [City] {
         // Show favorites
         if showFavoritesOnly {
-            return citiesList.filter { favorites.contains($0.id) }
+            return Array(favorites).sorted { $0.name < $1.name }
         }
 
         // Show list of cities without filter
@@ -48,18 +49,16 @@ class CitiesListViewModel: ObservableObject {
         Task {
             await loadCities()
         }
+        favorites = repository.fetchFavorites()
     }
 
     private func loadCities() async {
-        let cache = repository.fetchCities()
-        if !cache.isEmpty {
-            processCities(cache)
-            return
-        }
+        await MainActor.run { isLoading = true }
 
         do {
             let requestedCities = try await repository.requestCities()
             processCities(requestedCities)
+            await MainActor.run { isLoading = false }
         } catch {
             await MainActor.run {
                 self.errorMessage = "No se pudieron cargar las ciudades: \(error.localizedDescription)"
@@ -105,11 +104,13 @@ class CitiesListViewModel: ObservableObject {
     }
 
     func addOrRemoveFavorite(city: City) {
-        if favorites.contains(city.id) {
-            favorites.remove(city.id)
+        if favorites.contains(city) {
+            favorites.remove(city)
         } else {
-            favorites.insert(city.id)
+            favorites.insert(city)
         }
+
+        repository.saveFavorites(cities: favorites)
     }
 
     func toggleFavoritesOnly() {

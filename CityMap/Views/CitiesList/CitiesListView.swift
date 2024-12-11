@@ -13,20 +13,13 @@ struct CitiesListView: View {
     @Binding var selectedCity: City?
 
     var body: some View {
-        List {
-            ForEach(viewModel.visibleCities) { city in
-                NavigationLink(value: city) {
-                    CityRow(city)
-                }
-                .onAppear {
-                    if !viewModel.showFavoritesOnly && viewModel.searchText.isEmpty,
-                       city.id == viewModel.visibleCities.last?.id {
-                        viewModel.loadNextPage()
-                    }
-                }
+        VStack {
+            if viewModel.isLoading {
+                ProgressView()
+            } else {
+                CitiesList()
             }
         }
-        .listStyle(.plain)
         .navigationBarTitle(!viewModel.showFavoritesOnly ? "Cities" : "Favorited Cities", displayMode: .inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -41,6 +34,24 @@ struct CitiesListView: View {
 }
 
 private extension CitiesListView {
+    @ViewBuilder
+    func CitiesList() -> some View {
+        List {
+            ForEach(viewModel.visibleCities) { city in
+                NavigationLink(value: city) {
+                    CityRow(city)
+                }
+                .onAppear {
+                    if !viewModel.showFavoritesOnly && viewModel.searchText.isEmpty,
+                       city.id == viewModel.visibleCities.last?.id {
+                        viewModel.loadNextPage()
+                    }
+                }
+            }
+        }
+        .listStyle(.plain)
+    }
+
     @ViewBuilder
     func CityRow(_ city: City) -> some View {
         HStack {
@@ -61,7 +72,7 @@ private extension CitiesListView {
 
     @ViewBuilder
     func Favorite(_ city: City) -> some View {
-        let isFavorite = viewModel.favorites.contains(city.id)
+        let isFavorite = viewModel.favorites.contains(city)
 
         Image(systemName: isFavorite ? "star.fill" : "star")
             .foregroundColor(isFavorite ? .yellow : .gray)
@@ -72,7 +83,6 @@ private extension CitiesListView {
                 viewModel.addOrRemoveFavorite(city: city)
             }
     }
-
 
     @ViewBuilder
     func FavoriteNavigationBarButton() -> some View {

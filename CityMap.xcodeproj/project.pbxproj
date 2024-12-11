@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		3B2D21A22D09D5A100AD525D /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 3B2D21A12D09D5A100AD525D /* Storage */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		3B4FA36C2D09BCB900261ED5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3B2D219F2D09D59500AD525D /* Storage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Storage; sourceTree = "<group>"; };
 		3B4FA35B2D09BCB800261ED5 /* CityMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CityMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4FA36B2D09BCB900261ED5 /* CityMapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CityMapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4FA3752D09BCB900261ED5 /* CityMapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CityMapUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B2D21A22D09D5A100AD525D /* Storage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,12 +78,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B2D219D2D09D57200AD525D /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				3B2D219E2D09D57700AD525D /* Frameworks */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		3B2D219E2D09D57700AD525D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3B2D219F2D09D59500AD525D /* Storage */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		3B2D21A02D09D5A100AD525D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		3B4FA3522D09BCB800261ED5 = {
 			isa = PBXGroup;
 			children = (
+				3B2D219D2D09D57200AD525D /* Modules */,
 				3B4FA35D2D09BCB800261ED5 /* CityMap */,
 				3B4FA36E2D09BCB900261ED5 /* CityMapTests */,
 				3B4FA3782D09BCB900261ED5 /* CityMapUITests */,
+				3B2D21A02D09D5A100AD525D /* Frameworks */,
 				3B4FA35C2D09BCB800261ED5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,6 +143,7 @@
 			);
 			name = CityMap;
 			packageProductDependencies = (
+				3B2D21A12D09D5A100AD525D /* Storage */,
 			);
 			productName = CityMap;
 			productReference = 3B4FA35B2D09BCB800261ED5 /* CityMap.app */;
@@ -552,6 +584,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3B2D21A12D09D5A100AD525D /* Storage */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Storage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3B4FA3532D09BCB800261ED5 /* Project object */;
 }
